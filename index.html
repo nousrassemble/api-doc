@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>developers nous rassemble</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -13,7 +13,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["shell","ruby","python"]);
+          setupLanguages(["shell","php"]);
         });
       </script>
   </head>
@@ -28,9 +28,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="shell">cURL</a>
+              <a href="#" data-language-name="php">PHP</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -39,8 +38,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='https://www.nousrassemble.com/contact'>Sign Up for a Developer Key</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -54,19 +52,13 @@
 
 <p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
 
-<h1 id="authentication">Authentication</h1>
+          <h1 id="api">API</h1>
+
+          <h2 id="authentication">Authentication</h2>
 
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
 <pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
@@ -86,19 +78,9 @@ curl <span class="s2">"api_endpoint_here"</span>
 You must replace <code>meowmeowmeow</code> with your personal API key.
 </aside>
 
-<h1 id="kittens">Kittens</h1>
+          <h2 id="endpoints">Endpoints</h2>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
+<h3 id="get-all-kittens">Get All Kittens</h3>
 <pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
@@ -126,11 +108,11 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 <p>This endpoint retrieves all kittens.</p>
 
-<h3 id="http-request">HTTP Request</h3>
+<h4 id="http-request">HTTP Request</h4>
 
 <p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
 
-<h3 id="query-parameters">Query Parameters</h3>
+<h4 id="query-parameters">Query Parameters</h4>
 
 <table><thead>
 <tr>
@@ -155,17 +137,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 Remember — a happy kitten is an authenticated kitten!
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
+<h3 id="get-a-specific-kitten">Get a Specific Kitten</h3>
 <pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
   -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
@@ -186,11 +158,11 @@ Remember — a happy kitten is an authenticated kitten!
 
 <aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
 
-<h3 id="http-request">HTTP Request</h3>
+<h4 id="http-request">HTTP Request</h4>
 
 <p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
 
-<h3 id="url-parameters">URL Parameters</h3>
+<h4 id="url-parameters">URL Parameters</h4>
 
 <table><thead>
 <tr>
@@ -204,7 +176,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </tbody></table>
 
-          <h1 id="errors">Errors</h1>
+          <h2 id="errors">Errors</h2>
 
 <aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
 
@@ -262,12 +234,117 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 </tbody></table>
 
+          <h1 id="callbacks">Callbacks</h1>
+
+<h2 id="introduction">Introduction</h2>
+
+<p>Callbacks can be used in your app when you want to open the Nous Rassemble app instead of the website on a mobile or tablet.</p>
+
+<aside class="warning">
+Callback are not supported on desktop devices so you need to check the user agent to choose the right URL to call.
+</aside>
+<pre class="highlight javascript"><code><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">"https://itunes.apple.com/appdir"</span><span class="p">;</span> <span class="p">},</span> <span class="mi">25</span><span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">"appname://"</span><span class="p">;</span>
+</code></pre>
+
+<aside class="notice">
+You need to call the website too on a mobile or tablet if App is not installed.
+Here is a trick you can use.
+You can try redirecting the phone to the app, and if nothing happens redirect the phone to a specified page, like this:
+</aside>
+
+<h2 id="query-parameters">Query Parameters</h2>
+
+<p>In callbacks below, you need to inject the tenant ID or a proposal ID.</p>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">tenantid</code></td>
+<td>The ID of the tenant related with your call</td>
+</tr>
+<tr>
+<td><code class="prettyprint">proposalid</code></td>
+<td>The ID of the proposal related with your call</td>
+</tr>
+</tbody></table>
+
+<h2 id="endpoints">Endpoints</h2>
+
+<h3 id="tenant-home">Tenant home</h3>
+
+<p>To go to the tenant home page, call this link:</p>
+
+<p><a href="nousrassemble://home?tenantid=54f87559fa9b9e12498b456d">nousrassemble://home?tenantid=54f87559fa9b9e12498b456d</a></p>
+
+<hr>
+
+<h3 id="proposal">Proposal</h3>
+
+<p>To display a proposal, call this link:</p>
+
+<p><a href="nousrassemble://proposal?tenantid=54f87559fa9b9e12498b456d&amp;proposalid=5575922e529f9e292bd53cca">nousrassemble://proposal?tenantid=54f87559fa9b9e12498b456d&amp;proposalid=5575922e529f9e292bd53cca</a></p>
+
+<aside class="notice">
+You can go to the first comment by appending the hash <code>#timeline</code> to the URL:<br/>
+<a href="nousrassemble://proposal?tenantid=54f87559fa9b9e12498b456d&proposalid=5575922e529f9e292bd53cca#timeline">nousrassemble://proposal?tenantid=54f87559fa9b9e12498b456d&proposalid=5575922e529f9e292bd53cca#timeline</a>
+</aside>
+
+<h3 id="my-proposal">My proposal</h3>
+
+<p>To display on of my proposals, call this link:</p>
+
+<p><a href="nousrassemble://myproposals?tenantid=54f87559fa9b9e12498b456d&amp;proposalid=5575922e529f9e292bd53cca">nousrassemble://myproposals?tenantid=54f87559fa9b9e12498b456d&amp;proposalid=5575922e529f9e292bd53cca</a></p>
+
+<aside class="notice">
+This is useful to display my pending or rejected proposals.
+</aside>
+
+<h3 id="add-a-proposal">Add a proposal</h3>
+
+<p><a href="nousrassemble://proposal/add">nousrassemble://proposal/add</a></p>
+
+<h3 id="open-notification-panel">Open notification panel</h3>
+
+<p><a href="nousrassemble://notifications">nousrassemble://notifications</a></p>
+
+<h3 id="open-menu">Open menu</h3>
+
+<p><a href="nousrassemble://menu">nousrassemble://menu</a></p>
+
+<h3 id="open-tenant-selector">Open tenant selector</h3>
+
+<p><a href="nousrassemble://changesite">nousrassemble://changesite</a></p>
+
+<h3 id="my-favorites">My favorites</h3>
+
+<p><a href="nousrassemble://myfavorites">nousrassemble://myfavorites</a></p>
+
+<h3 id="my-proposals">My proposals</h3>
+
+<p><a href="nousrassemble://myproposals">nousrassemble://myproposals</a></p>
+
+<h3 id="my-votes">My votes</h3>
+
+<p><a href="nousrassemble://myvotes">nousrassemble://myvotes</a></p>
+
+<h3 id="my-profile">My profile</h3>
+
+<p><a href="nousrassemble://profile">nousrassemble://profile</a></p>
+
+<h3 id="my-parameters">My parameters</h3>
+
+<p><a href="nousrassemble://parameters">nousrassemble://parameters</a></p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="shell">cURL</a>
+                <a href="#" data-language-name="php">PHP</a>
           </div>
       </div>
     </div>
