@@ -1,7 +1,10 @@
 @charset "utf-8";
+//noinspection CssUnknownTarget
 @import 'normalize';
+//noinspection CssUnknownTarget
 @import 'compass';
 @import 'variables';
+//noinspection CssUnknownTarget
 @import 'syntax';
 @import 'icon-font';
 
@@ -195,6 +198,24 @@ html, body {
     &>li:last-child {
       box-shadow: none; // otherwise it'll overflow out of the subheader
     }
+  }
+
+  .tocify-subheader {
+  .tocify-subheader {
+    display: none; // tocify will override this when needed
+    background-color: $nav-subitem-bg;
+    font-weight: 500;
+    .tocify-item>a {
+      padding-left: $nav-padding + 2 * $nav-indent;
+      font-size: 12px;
+    }
+
+    // for embossed look:
+    @include embossed-bg;
+    &>li:last-child {
+      box-shadow: none; // otherwise it'll overflow out of the subheader
+    }
+  }
   }
 
   .toc-footer {
@@ -402,8 +423,8 @@ html, body {
 
   hr {
     margin: 2em 0;
-    border-top: 2px solid $examples-bg;
-    border-bottom: 2px solid $main-bg;
+    margin-right: $examples-width;
+    border-bottom: 1px solid $main-bg;
   }
 
   table {
