@@ -38,7 +38,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://www.nousrassemble.com/contact'>Sign Up for a Developer Key</a></li>
+            <li><a href='mailto:dev@nousrassemble.com'>Sign Up for a Developer Key</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -46,141 +46,142 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
-
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="http://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>Welcome to the <strong>nousrassemble</strong> developer documentation. You will find here all technical informations to connect your website or application with the <strong>nousrassemble</strong> plateform.</p>
 
           <h1 id="api">API</h1>
 
+<p>You can use our REST API to access <strong>nousrassemble</strong> API endpoints, where you can find all data and proposals for a tenant, a user, &hellip;</p>
+
+<aside class="warning">API is still in beta and you cannot create an App from the backend right now. Please write to <a href="mailto:dev@nousrassemble.com">dev@nousrassemble.com</a> to get an API token.</aside>
+
+<h2 id="tenant">Tenant</h2>
+
+<p><strong>nousrassemble</strong> is a multi-tenancy plateform. To select a tenant for an endpoint, just use the tenant URL to query the API :</p>
+
+<ul>
+<li>Use <a href="https://saint-quentin.nousrassemble.com">https://saint-quentin.nousrassemble.com</a> to reach endpoints for tenant <em>Saint Quentin</em></li>
+<li>Use <a href="https://grenoble.nousrassemble.com">https://grenoble.nousrassemble.com</a> to reach endpoints for tenant <em>Grenoble</em></li>
+</ul>
+
+<p>Some endpoint are global and cannot be reached with a tenant URL, so just use the global URL instead : <a href="https://www.nousrassemble.com">https://www.nousrassemble.com</a></p>
+
+<h2 id="language">Language</h2>
+
+<p>Some answers and actions can be localized, for example :</p>
+
+<ul>
+<li>error messages</li>
+<li>notifications</li>
+<li>global names for proposals</li>
+<li>&hellip;</li>
+</ul>
+
+<p>Set the user wanted language in the URL like this :</p>
+
+<ul>
+<li><a href="https://www.nousrassemble.com/fr/">https://www.nousrassemble.com/fr/</a> for french for global endpoints</li>
+<li><a href="https://grenoble.nousrassemble.com/en/">https://grenoble.nousrassemble.com/en/</a> for english on a specific tenant</li>
+</ul>
+
           <h2 id="authentication">Authentication</h2>
 
+<h3 id="retrieve-an-access-token">Retrieve an access token</h3>
+
 <blockquote>
-<p>To authorize, use this code:</p>
+<p>To retrieve a bearer token, use this code:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+<pre class="highlight shell"><code>curl --request POST <span class="se">\</span>
+  --url https://www.nousrassemble.com/fr/oauth/access_token <span class="se">\</span>
+  --header <span class="s1">'content-type: multipart/form-data; boundary=---011000010111000001101001'</span> <span class="se">\</span>
+  --form <span class="nv">grant_type</span><span class="o">=</span>password <span class="se">\</span>
+  --form <span class="nv">client_id</span><span class="o">=</span>120e3fc4c59a394f8560c8b8b8759b <span class="se">\</span>
+  --form <span class="nv">client_secret</span><span class="o">=</span>a204abcd1d983434f92b10f2ea62ff <span class="se">\</span>
+  --form <span class="nv">username</span><span class="o">=</span>THE_USER_NAME <span class="se">\</span>
+  --form <span class="nv">password</span><span class="o">=</span>THE_USER_PASSWORD <span class="se">\</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Message\Body</span><span class="p">;</span>
+<span class="nv">$body</span><span class="o">-&gt;</span><span class="na">addForm</span><span class="p">([</span>
+  <span class="s1">'grant_type'</span>    <span class="o">=&gt;</span> <span class="s1">'password'</span><span class="p">,</span>
+  <span class="s1">'client_id'</span>     <span class="o">=&gt;</span> <span class="s1">'120e3fc4c59a394f8560c8b8b8759b'</span><span class="p">,</span>
+  <span class="s1">'client_secret'</span> <span class="o">=&gt;</span> <span class="s1">'a204abcd1d983434f92b10f2ea62ff'</span><span class="p">,</span>
+  <span class="s1">'username'</span>      <span class="o">=&gt;</span> <span class="s1">'THE_USER_NAME'</span><span class="p">,</span>
+  <span class="s1">'password'</span>      <span class="o">=&gt;</span> <span class="s1">'THE_USER_PASSWORD'</span><span class="p">,</span>
+<span class="p">],</span> <span class="kc">null</span><span class="p">);</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://www.nousrassemble.com/fr/oauth/access_token'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'POST'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setBody</span><span class="p">(</span><span class="nv">$body</span><span class="p">);</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-          <h2 id="endpoints">Endpoints</h2>
-
-<h3 id="get-all-kittens">Get All Kittens</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all kittens.</p>
-
-<h4 id="http-request">HTTP Request</h4>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h4 id="query-parameters">Query Parameters</h4>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-<h3 id="get-a-specific-kitten">Get a Specific Kitten</h3>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
-
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>You should retrieve this kind of object:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Isis"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="nt">"access_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mn4KabcC2P8CLw5LU5xIb8Zsx16aALXRXnHhA01b"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"token_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Bearer"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"expires_in"</span><span class="p">:</span><span class="w"> </span><span class="mi">31536000</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"refresh_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bcuA27CuNtHOzyMakYbXlsqp1JRQ92vE17oAggyb"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
+<p><strong>nousrassemble</strong> API needs authenticated users to execute endpoints. <strong>nousrassemble</strong> uses classic OAuth2 system to authenticate users.</p>
 
-<aside class="warning">If you&rsquo;re not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
+<p>You need a <code class="prettyprint">client_id</code> and <code class="prettyprint">client_secret</code> to retrieve an access token.</p>
 
-<h4 id="http-request">HTTP Request</h4>
+<aside class="notice">
+You must replace <code>client_id</code> and <code>client_secret</code> with your personal credentials.
+<p><code>username</code> and <code>password</code> are user credentials. If you use an app without need to authenticate user, you can create a <em>static</em> user especially for this.</p>
+</aside>
 
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
+<p>Once you get the <code class="prettyprint">access_token</code>, you will be able to keep it in your application for 31536000 seconds (1 year).</p>
 
-<h4 id="url-parameters">URL Parameters</h4>
+<h3 id="use-an-access-token">Use an access token</h3>
 
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
+<p>Now you have an access token, you can reach endpoints just be setting Authorization header to <code class="prettyprint">Bearer access_token</code>.</p>
+
+<blockquote>
+<p>To retrieve proposal list for a tenant:</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="se">\</span>
+    -X GET
+    -H <span class="s2">"Authorization: Bearer mn4KabcC2P8CLw5LU5xIb8Zsx16aALXRXnHhA01b"</span>
+    -H <span class="s2">"Cache-Control: no-cache"</span>
+    <span class="s1">'https://grenoble.nousrassemble.com/fr/api/proposals?include=createdby,themes'</span>
+</code></pre>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client</span><span class="p">;</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">http\Client\Request</span><span class="p">;</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestUrl</span><span class="p">(</span><span class="s1">'https://grenoble.nousrassemble.com/fr/api/proposals'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setRequestMethod</span><span class="p">(</span><span class="s1">'GET'</span><span class="p">);</span>
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setQuery</span><span class="p">(</span><span class="k">new</span> <span class="nx">http\QueryString</span><span class="p">([</span>
+  <span class="s1">'include'</span> <span class="o">=&gt;</span> <span class="s1">'createdby,themes'</span>
+<span class="p">]));</span>
+
+<span class="nv">$request</span><span class="o">-&gt;</span><span class="na">setHeaders</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+  <span class="s1">'authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer mn4KabcC2P8CLw5LU5xIb8Zsx16aALXRXnHhA01b'</span>
+<span class="p">));</span>
+
+<span class="nv">$client</span><span class="o">-&gt;</span><span class="na">enqueue</span><span class="p">(</span><span class="nv">$request</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">();</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">getResponse</span><span class="p">();</span>
+
+<span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+</code></pre>
 
           <h2 id="errors">Errors</h2>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The <strong>nousrassemble</strong> API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -190,47 +191,51 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request &ndash; Your request sucks</td>
+<td><strong>Bad Request</strong></td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key is wrong</td>
+<td><strong>Unauthorized</strong></td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td><strong>Forbidden</strong></td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td><strong>Not Found</strong></td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td><strong>Method Not Allowed</strong></td>
 </tr>
 <tr>
 <td>406</td>
-<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+<td><strong>Not Acceptable</strong></td>
 </tr>
 <tr>
 <td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+<td><strong>Conflict</strong></td>
+</tr>
+<tr>
+<td>410</td>
+<td><strong>Gone</strong></td>
 </tr>
 <tr>
 <td>418</td>
-<td>I&rsquo;m a teapot</td>
+<td><strong>I&rsquo;m a teapot</strong></td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td><strong>Too Many Requests</strong> : You&rsquo;re requesting too many things! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
-<td>Internal Server Error &ndash; We had a problem with our server. Try again later.</td>
+<td><strong>Internal Server Error</strong> : We had a problem with our server. Try again later.</td>
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td><strong>Service Unavailable</strong> : We&rsquo;re down for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
