@@ -6,12 +6,11 @@ language_tabs:
   - php  : PHP
 
 toc_footers:
-  - <a href='https://www.nousrassemble.com/contact'>Sign Up for a Developer Key</a>
+  - <a href='mailto:dev@nousrassemble.com'>Sign Up for a Developer Key</a>
 
 includes:
   - api
   - api_authentication
-  - api_endpoints
   - api_errors
   - callbacks
 
@@ -20,9 +19,4 @@ search: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
-
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
-
+Welcome to the **nousrassemble** developer documentation. You will find here all technical informations to connect your website or application with the **nousrassemble** plateform.
