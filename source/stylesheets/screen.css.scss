@@ -351,6 +351,10 @@ html, body {
 	position : relative;
 	z-index  : 30;
 
+	a {
+		color : $nr_purple;
+	}
+
 	&:after {
 		content : '';
 		display : block;
@@ -498,15 +502,16 @@ html, body {
 		margin-bottom  : 1.5em;
 		background     : $aside-notice-bg;
 		line-height    : 1.6;
+		color          : #fff;
+
+		a {
+			color : #fff;
+		}
 
 		&.warning {
 			background-color : $aside-warning-bg;
 			color            : #fff;
 			@include text-shadow(0 0 0 lighten($aside-warning-bg, 15%));
-			a {
-				color : darken( $aside-warning-bg , 40% );
-				font-weight: bold;
-			}
 		}
 
 		&.success {
