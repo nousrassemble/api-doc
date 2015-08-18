@@ -9,14 +9,14 @@ Callbacks can be used in your app when you want to open the Nous Rassemble app i
 Callback are not supported on desktop devices so you need to check the user agent to choose the right URL to call.
 </aside>
 
-<pre><code>
+```js
 setTimeout(
 	function () {
 		window.location = "https://www.nousrassemble.com";
 	} , 25
 );
 window.location = "nousrassemble://home";
-</code></pre>
+```
 
 <aside class="notice">
 You need to call the website too on a mobile or tablet if App is not installed.
