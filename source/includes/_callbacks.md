@@ -9,10 +9,14 @@ Callbacks can be used in your app when you want to open the Nous Rassemble app i
 Callback are not supported on desktop devices so you need to check the user agent to choose the right URL to call.
 </aside>
 
-```js
-setTimeout(function () { window.location = "https://itunes.apple.com/appdir"; }, 25);
-window.location = "appname://";
-```
+<pre><code>
+setTimeout(
+	function () {
+		window.location = "https://www.nousrassemble.com";
+	} , 25
+);
+window.location = "nousrassemble://home";
+</code></pre>
 
 <aside class="notice">
 You need to call the website too on a mobile or tablet if App is not installed.
@@ -55,7 +59,7 @@ You can go to the first comment by appending the hash <code>#timeline</code> to 
 
 ### My proposal
 
-To display on of my proposals, call this link:
+To go to user proposals page, call this link:
 
 <nousrassemble://myproposals?tenantid=54f87559fa9b9e12498b456d&proposalid=5575922e529f9e292bd53cca>
 
@@ -63,38 +67,50 @@ To display on of my proposals, call this link:
 This is useful to display my pending or rejected proposals.
 </aside>
 
+### My favorites
+
+To go to user favorites page, call this link:
+
+<nousrassemble://myfavorites>
+
+### My votes
+
+To go to the page of proposals for which user has voted, call this link:
+
+<nousrassemble://myvotes>
+
 ### Add a proposal
 
-<nousrassemble://proposal/add>
+To go to the new proposal form, call this link:
+
+<nousrassemble://proposal/add?tenantid=54f87559fa9b9e12498b456d>
 
 ### Open notification panel
+
+To go to home with the notifications right panel opened, call this link:
 
 <nousrassemble://notifications>
 
 ### Open menu
 
+To go to home with the menu left panel opened, call this link:
+
 <nousrassemble://menu>
 
 ### Open tenant selector
 
+To go to home with the tenant selector opened on top, call this link:
+
 <nousrassemble://changesite>
 
-### My favorites
-
-<nousrassemble://myfavorites>
-
-### My proposals
-
-<nousrassemble://myproposals>
-
-### My votes
-
-<nousrassemble://myvotes>
-
 ### My profile
+
+To go to the user profile page, call this link:
 
 <nousrassemble://profile>
 
 ### My parameters
+
+To go to the user settings page, call this link:
 
 <nousrassemble://parameters>
