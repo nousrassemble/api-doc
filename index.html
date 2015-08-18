@@ -185,57 +185,65 @@ You must replace <code>client_id</code> and <code>client_secret</code> with your
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>Code</th>
 <th>Meaning</th>
+<th>Example</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>400</td>
 <td><strong>Bad Request</strong></td>
+<td></td>
 </tr>
 <tr>
 <td>401</td>
 <td><strong>Unauthorized</strong></td>
+<td>Happen generally when Authorization header is not sent and then request is anonymous</td>
 </tr>
 <tr>
 <td>403</td>
 <td><strong>Forbidden</strong></td>
+<td>Can happen when user is not granted to access an object or when a tenant is not yet available (has a curtain)</td>
 </tr>
 <tr>
 <td>404</td>
 <td><strong>Not Found</strong></td>
-</tr>
-<tr>
-<td>405</td>
-<td><strong>Method Not Allowed</strong></td>
+<td>An object does not exist</td>
 </tr>
 <tr>
 <td>406</td>
 <td><strong>Not Acceptable</strong></td>
+<td>You try to do perform a forbidden action as unliking on a tenant which has disable negative votes</td>
 </tr>
 <tr>
-<td>410</td>
+<td>409</td>
 <td><strong>Conflict</strong></td>
+<td>An object has been updated before your update or you try to vote for a proposal on the</td>
 </tr>
 <tr>
 <td>410</td>
 <td><strong>Gone</strong></td>
+<td>An object is no more available. It can happen when a tenant is not available on API</td>
 </tr>
 <tr>
-<td>418</td>
-<td><strong>I&rsquo;m a teapot</strong></td>
+<td>422</td>
+<td><strong>Unprocessable</strong></td>
+<td>Occurs when you reset a password and new password is not well-formed for example</td>
 </tr>
 <tr>
 <td>429</td>
-<td><strong>Too Many Requests</strong> : You&rsquo;re requesting too many things! Slow down!</td>
+<td><strong>Too Many Requests</strong></td>
+<td>You&rsquo;re requesting too many things! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
-<td><strong>Internal Server Error</strong> : We had a problem with our server. Try again later.</td>
+<td><strong>Internal Server Error</strong></td>
+<td>We had a problem with our server. Try again later.</td>
 </tr>
 <tr>
 <td>503</td>
-<td><strong>Service Unavailable</strong> : We&rsquo;re down for maintenance. Please try again later.</td>
+<td><strong>Service Unavailable</strong></td>
+<td>We&rsquo;re down for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
@@ -248,8 +256,12 @@ You must replace <code>client_id</code> and <code>client_secret</code> with your
 <aside class="warning">
 Callback are not supported on desktop devices so you need to check the user agent to choose the right URL to call.
 </aside>
-<pre class="highlight javascript"><code><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">"https://itunes.apple.com/appdir"</span><span class="p">;</span> <span class="p">},</span> <span class="mi">25</span><span class="p">);</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">"appname://"</span><span class="p">;</span>
+<pre class="highlight javascript"><code><span class="nx">setTimeout</span><span class="p">(</span>
+    <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">"https://www.nousrassemble.com"</span><span class="p">;</span>
+    <span class="p">}</span> <span class="p">,</span> <span class="mi">25</span>
+<span class="p">);</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">location</span> <span class="o">=</span> <span class="s2">"nousrassemble://home"</span><span class="p">;</span>
 </code></pre>
 
 <aside class="notice">
@@ -301,7 +313,7 @@ You can go to the first comment by appending the hash <code>#timeline</code> to 
 
 <h3 id="my-proposal">My proposal</h3>
 
-<p>To display on of my proposals, call this link:</p>
+<p>To go to user proposals page, call this link:</p>
 
 <p><a href="nousrassemble://myproposals?tenantid=54f87559fa9b9e12498b456d&amp;proposalid=5575922e529f9e292bd53cca">nousrassemble://myproposals?tenantid=54f87559fa9b9e12498b456d&amp;proposalid=5575922e529f9e292bd53cca</a></p>
 
@@ -309,39 +321,51 @@ You can go to the first comment by appending the hash <code>#timeline</code> to 
 This is useful to display my pending or rejected proposals.
 </aside>
 
+<h3 id="my-favorites">My favorites</h3>
+
+<p>To go to user favorites page, call this link:</p>
+
+<p><a href="nousrassemble://myfavorites">nousrassemble://myfavorites</a></p>
+
+<h3 id="my-votes">My votes</h3>
+
+<p>To go to the page of proposals for which user has voted, call this link:</p>
+
+<p><a href="nousrassemble://myvotes">nousrassemble://myvotes</a></p>
+
 <h3 id="add-a-proposal">Add a proposal</h3>
 
-<p><a href="nousrassemble://proposal/add">nousrassemble://proposal/add</a></p>
+<p>To go to the new proposal form, call this link:</p>
+
+<p><a href="nousrassemble://proposal/add?tenantid=54f87559fa9b9e12498b456d">nousrassemble://proposal/add?tenantid=54f87559fa9b9e12498b456d</a></p>
 
 <h3 id="open-notification-panel">Open notification panel</h3>
+
+<p>To go to home with the notifications right panel opened, call this link:</p>
 
 <p><a href="nousrassemble://notifications">nousrassemble://notifications</a></p>
 
 <h3 id="open-menu">Open menu</h3>
 
+<p>To go to home with the menu left panel opened, call this link:</p>
+
 <p><a href="nousrassemble://menu">nousrassemble://menu</a></p>
 
 <h3 id="open-tenant-selector">Open tenant selector</h3>
 
+<p>To go to home with the tenant selector opened on top, call this link:</p>
+
 <p><a href="nousrassemble://changesite">nousrassemble://changesite</a></p>
 
-<h3 id="my-favorites">My favorites</h3>
-
-<p><a href="nousrassemble://myfavorites">nousrassemble://myfavorites</a></p>
-
-<h3 id="my-proposals">My proposals</h3>
-
-<p><a href="nousrassemble://myproposals">nousrassemble://myproposals</a></p>
-
-<h3 id="my-votes">My votes</h3>
-
-<p><a href="nousrassemble://myvotes">nousrassemble://myvotes</a></p>
-
 <h3 id="my-profile">My profile</h3>
+
+<p>To go to the user profile page, call this link:</p>
 
 <p><a href="nousrassemble://profile">nousrassemble://profile</a></p>
 
 <h3 id="my-parameters">My parameters</h3>
+
+<p>To go to the user settings page, call this link:</p>
 
 <p><a href="nousrassemble://parameters">nousrassemble://parameters</a></p>
 
