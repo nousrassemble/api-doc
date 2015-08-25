@@ -247,6 +247,51 @@ You must replace <code>client_id</code> and <code>client_secret</code> with your
 </tr>
 </tbody></table>
 
+<h3 id="localized-errors">Localized errors</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Cette action n'est pas possible sur Terre"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">401</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>According to the language token passed in the URL, you will retrieve a human message in the <code class="prettyprint">message</code> field ready to use.</p>
+
+<p>The HTTP code is available in the <code class="prettyprint">status_code</code> field.</p>
+
+<h3 id="additional-code">Additional code</h3>
+<pre class="highlight plaintext"><code>When the API is disabled for the whole tenant:
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Le site n'est plus disponible"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">410</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">2706</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight plaintext"><code>When the curtain is active:
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Le site n'est pas encore disponible"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"status_code"</span><span class="p">:</span><span class="w"> </span><span class="mi">403</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="mi">2706</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>You can receive an additional <code class="prettyprint">code</code> field with a specific value. Here are the supported additional codes:</p>
+
+<table><thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>2706</td>
+<td><strong>Tenant no more/yet available</strong></td>
+<td>The tenant is no more available because :<ul><li>it has been hidden with the curtain</li><li>the API has been disabled by tenant admin</li></ul></td>
+</tr>
+</tbody></table>
+
           <h1 id="callbacks">Callbacks</h1>
 
 <h2 id="introduction">Introduction</h2>
