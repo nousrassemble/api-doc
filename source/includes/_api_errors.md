@@ -15,3 +15,49 @@ Code | Meaning  | Example
 429 | **Too Many Requests** | You're requesting too many things! Slow down!
 500 | **Internal Server Error** | We had a problem with our server. Try again later.
 503 | **Service Unavailable** | We're down for maintenance. Please try again later.
+
+### Localized errors
+
+```json
+{
+    "message": "Cette action n'est pas possible sur Terre",
+    "status_code": 401
+}
+```
+
+According to the language token passed in the URL, you will retrieve a human message in the `message` field ready to use.
+
+The HTTP code is available in the `status_code` field.
+
+
+### Additional code
+
+```
+When the API is disabled for the whole tenant:
+```
+
+```json
+{
+    "message": "Le site n'est plus disponible",
+    "status_code": 410,
+    "code": 2706
+}
+```
+
+```
+When the curtain is active:
+```
+
+```
+{
+    "message": "Le site n'est pas encore disponible",
+    "status_code": 403,
+    "code": 2706
+}
+```
+
+You can receive an additional `code` field with a specific value. Here are the supported additional codes:
+
+Code       | Meaning                          | Description
+---------- | ----------                       | ----------
+2706       | **Tenant no more/yet available** | The tenant is no more available because :<ul><li>it has been hidden with the curtain</li><li>the API has been disabled by tenant admin</li></ul>
